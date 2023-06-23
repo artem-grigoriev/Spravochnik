@@ -4,7 +4,7 @@
     {
         private static void Main(string[] args)
         {
-            var workers = Repository.GetAllWorkers();
+            var workers = new Repository();
             while (true)
             {
                 Console.WriteLine("1 - вывести данные на экран, 2 - заполнить данные и добавить новую запись в конец файла.");
@@ -25,8 +25,7 @@
                 {
                     if (chose == 2)
                     {
-                        Repository.AddWorker(workers);
-                        workers = Repository.GetAllWorkers();
+                        workers.AddWorker();
                         continue;
                     }
                     if(workers == null)
@@ -37,35 +36,35 @@
                     switch (chose)
                     {
                         case 1:
-                            Repository.ShowWorkers(workers);
+                            workers.ShowWorkers();
                             break;
                         case 3:
                             Console.WriteLine("Введите id");
                             id = Int32.Parse(Console.ReadLine());
-                            Repository.ShowWorkers(Repository.GetWorkerById(workers, id));
+                            workers.ShowWorkers(workers.GetWorkerById(id));
                             break;
                         case 4:
                             Console.WriteLine("Введите дату начала выборки");
                             DateTime dateFrom = DateTime.Parse(Console.ReadLine());
                             Console.WriteLine("Введите дату конца выборки");
                             DateTime dateTo = DateTime.Parse(Console.ReadLine());
-                            Repository.ShowWorkers(Repository.GetWorkersBetweenTwoDates(workers, dateFrom, dateTo));
+                            workers.ShowWorkers(workers.GetWorkersBetweenTwoDates(dateFrom, dateTo));
                             break;
                         case 5:
                             Console.WriteLine("Введите id");
                             id = Int32.Parse(Console.ReadLine());
-                            Repository.DeleteWorker(workers, id);
+                            workers.DeleteWorker(id);
                             break;
                         case 6:
                             Console.WriteLine("Введите id");
                             id = Int32.Parse(Console.ReadLine());
-                            Repository.EditWorkerById(workers, id);
+                            workers.EditWorkerById(id);
                             break;
                         case 8:
-                            Repository.SaveWorkers(workers);
+                            workers.SaveWorkers();
                             return;
                         case 7:
-                            Repository.ShowWorkers(workers.OrderBy(w => w.BirthDate).ToList());
+                            workers.ShowByBirthDate();
                             break;
                         default:
                             Console.WriteLine("Такой команды нет!");
