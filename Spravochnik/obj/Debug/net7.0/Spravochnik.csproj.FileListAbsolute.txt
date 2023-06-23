@@ -1,0 +1,15 @@
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\bin\Debug\net7.0\Spravochnik.exe
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\bin\Debug\net7.0\Spravochnik.deps.json
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\bin\Debug\net7.0\Spravochnik.runtimeconfig.json
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\bin\Debug\net7.0\Spravochnik.dll
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\bin\Debug\net7.0\Spravochnik.pdb
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\obj\Debug\net7.0\Spravochnik.csproj.AssemblyReference.cache
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\obj\Debug\net7.0\Spravochnik.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\obj\Debug\net7.0\Spravochnik.AssemblyInfoInputs.cache
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\obj\Debug\net7.0\Spravochnik.AssemblyInfo.cs
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\obj\Debug\net7.0\Spravochnik.csproj.CoreCompileInputs.cache
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\obj\Debug\net7.0\Spravochnik.dll
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\obj\Debug\net7.0\refint\Spravochnik.dll
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\obj\Debug\net7.0\Spravochnik.pdb
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\obj\Debug\net7.0\Spravochnik.genruntimeconfig.cache
+C:\Users\Artem\source\repos\Spravochnik\Spravochnik\obj\Debug\net7.0\ref\Spravochnik.dll
