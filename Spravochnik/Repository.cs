@@ -1,36 +1,38 @@
 ﻿using Models;
+using System.Globalization;
 
 namespace Spravochnik
 {
     internal class Repository
     {
-        private List<Worker> Workers { get; set; }
-        public Repository() => Workers = GetAllWorkers();
+        private List<Worker> workersList;
+
+        public Repository() => workersList = GetAllWorkers();
         public void AddWorker()
         {
             int newId;
-            int[] ids = (Workers != null) ? Workers.Select(w => w.Id).ToArray() : new int[1] { 0 };
+            int[] ids = (workersList != null) ? workersList.Select(w => w.Id).ToArray() : new int[1] { 0 };
             newId = (ids[0] == 0) ? 1 : ids.OrderBy(i => i).Reverse().First() + 1;            
             Worker worker = AddWorker(newId, DateTime.Now);
-            if (Workers != null)
-                Workers.Add(worker);
-            else Workers = new List<Worker>() { worker };
+            if (workersList != null)
+                workersList.Add(worker);
+            else workersList = new List<Worker>() { worker };
         }
         public void SaveWorkers()
         {
-            if (Workers == null)
+            if (workersList == null)
                 File.WriteAllText(@"..\..\..\workers.txt", "");
             else
             {
-                string[] lines = new string[Workers.Count];
-                for (int i = 0; i < Workers.Count; i++)
-                    lines[i] = $"{Workers[i].Id}#{Workers[i].DateAdd}#" +
-                               $"{Workers[i].Fio}#{Workers[i].Age}#{Workers[i].Height}#" +
-                               $"{Workers[i].BirthDate}#{Workers[i].BirthPlace}";
+                string[] lines = new string[workersList.Count];
+                for (int i = 0; i < workersList.Count; i++)
+                    lines[i] = $"{workersList[i].Id}#{workersList[i].DateAdd}#" +
+                               $"{workersList[i].Fio}#{workersList[i].Age}#{workersList[i].Height}#" +
+                               $"{workersList[i].BirthDate}#{workersList[i].BirthPlace}";
                 File.WriteAllLines(@"..\..\..\workers.txt", lines);
             }
         }
-        public void ShowWorkers() => ShowWorkers(Workers);
+        public void ShowWorkers() => ShowWorkers(workersList);
         public void ShowWorkers(Worker worker)
         {
             Console.WriteLine($"{worker.Id} " +
@@ -58,19 +60,19 @@ namespace Spravochnik
         }
         public void EditWorkerById(int id)
         {
-            var workerIndex = Workers.FindIndex(w => w.Id == id);
+            var workerIndex = workersList.FindIndex(w => w.Id == id);
             if (workerIndex == -1) throw new Exception();
-            Workers[workerIndex] = AddWorker(Workers[workerIndex].Id, Workers[workerIndex].DateAdd);
+            workersList[workerIndex] = AddWorker(workersList[workerIndex].Id, workersList[workerIndex].DateAdd);
         }
-        public Worker GetWorkerById(int id) => Workers.Find(w => w.Id == id);
-        public List<Worker> GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo) => Workers.Where(w => w.DateAdd >= dateFrom && w.DateAdd <= dateTo).ToList();
-        public void DeleteWorker(int id) => Workers.RemoveAll(w => w.Id == id);
-        public List<Worker> ShowByBirthDate() => Workers.OrderBy(w => w.BirthDate).ToList();
+        public Worker GetWorkerById(int id) => workersList.Find(w => w.Id == id);
+        public List<Worker> GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo) => workersList.Where(w => w.DateAdd >= dateFrom && w.DateAdd <= dateTo).ToList();
+        public void DeleteWorker(int id) => workersList.RemoveAll(w => w.Id == id);
+        public List<Worker> ShowByBirthDate() => workersList.OrderBy(w => w.BirthDate).ToList();
         private static Worker AddWorker(int id, DateTime dateAdd)
         {
             Console.WriteLine("Введите через запятую(после запятой пробел не ставить) ФИО, рост, дату и место рождения:");
             string[] item = Console.ReadLine().Split(',');
-            DateTime birthDate = DateTime.Parse(item[2]);
+            DateTime birthDate = DateTime.ParseExact(item[2], "d", CultureInfo.InvariantCulture);
             var totalmonths = (DateTime.Now.Year - birthDate.Year) * 12 + DateTime.Now.Month - birthDate.Month;
             totalmonths += DateTime.Now.Day < birthDate.Day ? -1 : 0;
             return new Worker()
