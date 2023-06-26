@@ -1,4 +1,6 @@
-﻿namespace Spravochnik
+﻿using System.Globalization;
+
+namespace Spravochnik
 {
     internal class Program
     {

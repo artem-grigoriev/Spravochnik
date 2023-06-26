@@ -1,5 +1,4 @@
 ﻿using Models;
-using System.Globalization;
 
 namespace Spravochnik
 {
@@ -72,7 +71,7 @@ namespace Spravochnik
         {
             Console.WriteLine("Введите через запятую(после запятой пробел не ставить) ФИО, рост, дату и место рождения:");
             string[] item = Console.ReadLine().Split(',');
-            DateTime birthDate = DateTime.ParseExact(item[2], "d", CultureInfo.InvariantCulture);
+            DateTime birthDate = DateTime.Parse(item[2]);
             var totalmonths = (DateTime.Now.Year - birthDate.Year) * 12 + DateTime.Now.Month - birthDate.Month;
             totalmonths += DateTime.Now.Day < birthDate.Day ? -1 : 0;
             return new Worker()
