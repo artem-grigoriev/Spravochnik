@@ -11,17 +11,20 @@
         public string BirthPlace { get; set; }
         public static Worker AddWorker(int id, DateTime dateAdd)
         {
-            Console.WriteLine("Введите через запятую(после запятой пробел не ставить) ФИО, возраст, рост, дату и место рождения:");
+            Console.WriteLine("Введите через запятую(после запятой пробел не ставить) ФИО, рост, дату и место рождения:");
             string[] item = Console.ReadLine().Split(',');
+            DateTime birthDate = DateTime.Parse(item[2]);
+            var totalmonths = (DateTime.Now.Year - birthDate.Year) * 12 + DateTime.Now.Month - birthDate.Month;
+            totalmonths += DateTime.Now.Day < birthDate.Day ? -1 : 0;
             return new Worker()
             {
                 Id = id,
                 DateAdd = dateAdd,
                 Fio = item[0],
-                Age = Int32.Parse(item[1]),
-                Height = Int32.Parse(item[2]),
-                BirthDate = DateTime.Parse(item[3]), // почему то возвращает со временем
-                BirthPlace = item[4]
+                Age = totalmonths / 12,
+                Height = Int32.Parse(item[1]),
+                BirthDate = birthDate, // почему то возвращает со временем
+                BirthPlace = item[3]
             };
         }
         public static Worker AddWorker(string[] item)

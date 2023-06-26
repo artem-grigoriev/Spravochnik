@@ -66,6 +66,5 @@ namespace Spravochnik
         public List<Worker> GetWorkersBetweenTwoDates(DateTime dateFrom, DateTime dateTo) => Workers.Where(w => w.DateAdd >= dateFrom && w.DateAdd <= dateTo).ToList();
         public void DeleteWorker(int id) => Workers.RemoveAll(w => w.Id == id);
         public List<Worker> ShowByBirthDate() => Workers.OrderBy(w => w.BirthDate).ToList();
-        
     }
 }

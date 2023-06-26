@@ -16,7 +16,7 @@
                 {
                     chose = Int32.Parse(Console.ReadLine());
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Console.WriteLine("Вы ввели некорректные данные");
                     continue;
@@ -64,14 +64,14 @@
                             workers.SaveWorkers();
                             return;
                         case 7:
-                            workers.ShowByBirthDate();
+                            workers.ShowWorkers(workers.ShowByBirthDate());
                             break;
                         default:
                             Console.WriteLine("Такой команды нет!");
                             break;
                     }
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     Console.WriteLine("Вы ввели некорректные данные, файла не существует или нет такого работника!");
                     continue;
