@@ -88,5 +88,8 @@ internal class Repository : IRepository
             ?.Select(x => x.Split('#'))
             .Select(x => ConvertStringToWorker(x))
             .ToList() ?? new();
+
+        // И да, тут тоже лучше StreamReader
+        // yield return new Worker(); //ляляля
     }
 }
