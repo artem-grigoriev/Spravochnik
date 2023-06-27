@@ -12,7 +12,7 @@ internal class Repository : IRepository
     {
         get
         {
-            return workersList.Select(worker => worker.Id).Max() + 1;
+            return (workersList != null) ? workersList.Select(worker => worker.Id).Max() + 1 : 1;
         }
     }
 
@@ -22,7 +22,10 @@ internal class Repository : IRepository
 
     public void AddWorker(Worker worker)
     {
-        workersList.Add(worker);
+        if(workersList != null)
+            workersList.Add(worker);
+        else
+            workersList = new List<Worker>() { worker };
     }
 
     public void DeleteWorker(int id) => workersList.RemoveAll(w => w.Id == id);
@@ -38,7 +41,7 @@ internal class Repository : IRepository
 
     public void SaveWorkers()
     {
-        if (true)
+        if (false)
         {
             File.WriteAllText(FilePath, ""); // просто чистка сразу, всё равно перезаписывать
 
@@ -84,10 +87,29 @@ internal class Repository : IRepository
             File.Create(FilePath);
             return new();
         }
-        return File.ReadAllLines(FilePath)
+        StreamReader reader = new(FilePath);
+        List<Worker> workers = new();
+        workers = reader.ReadToEnd()?.Split('\n')
+            .Where(x => x.Length > 0)
+            .Select(x => x.Split('#'))
+            .Select(ConvertStringToWorker)
+            .ToList() ?? new();
+        reader.Close();
+        reader.Dispose();
+        return workers;
+        /*пока с yield не разобрался*/
+        /*string? line;
+        while ((line = reader.ReadLine())!= null)
+        {
+            string[] parsedLine = line.Split('#');
+            yield return ConvertStringToWorker(parsedLine);
+        }*/
+
+
+        /*return File.ReadAllLines(FilePath)
             ?.Select(x => x.Split('#'))
             .Select(x => ConvertStringToWorker(x))
-            .ToList() ?? new();
+            .ToList() ?? new();*/
 
         // И да, тут тоже лучше StreamReader
         // yield return new Worker(); //ляляля

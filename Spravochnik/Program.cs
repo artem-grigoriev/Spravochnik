@@ -1,4 +1,6 @@
-﻿namespace Spravochnik;
+﻿
+
+namespace Spravochnik;
 
 internal class Program
 {
